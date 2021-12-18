@@ -2,6 +2,7 @@ package com.example.testrest.services;
 
 
 import com.example.testrest.domain.Categoria;
+import com.example.testrest.dto.CategoriaDTO;
 import com.example.testrest.repositories.CategoriaRepository;
 import com.example.testrest.services.exceptions.DataIntegrityException;
 import com.example.testrest.services.exceptions.ObjectNotFoundException;
@@ -54,5 +55,9 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
+    }
+
+    public Categoria fromDTO(CategoriaDTO objDto){
+        return new Categoria(objDto.getId(), objDto.getNome());
     }
 }
